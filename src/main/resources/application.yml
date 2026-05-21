@@ -1,0 +1,52 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: dorm-management
+  datasource:
+    url: jdbc:h2:file:./data/dorm;DB_CLOSE_DELAY=-1;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+  h2:
+    console:
+      enabled: true
+
+# 架构灵活性：通过配置开关与端点集成各系统，避免强耦合
+dorm:
+  jwt:
+    secret: your-256-bit-secret-key-here-change-in-production!!!
+    expiration-ms: 86400000
+  security:
+    encryption-key: 0123456789abcdef0123456789abcdef
+  integration:
+    sso:
+      enabled: false
+      base-url: https://sso.school.edu
+      token-validate-path: /api/auth/validate
+      user-info-path: /api/user/info
+    finance:
+      enabled: false
+      base-url: https://finance.school.edu
+      fee-sync-path: /api/fee/sync
+    academic:
+      enabled: false
+      base-url: https://jwxt.school.edu
+      student-class-path: /api/student/class
+    security-monitor:
+      enabled: false
+      base-url: https://monitor.school.edu
+      alarm-callback-path: /api/alarm/callback
