@@ -15,6 +15,10 @@ public class FeedbackService {
         this.repository = repository;
     }
 
+    public List<Feedback> findAll() {
+        return repository.findAll();
+    }
+
     public Feedback create(Feedback feedback) {
         return repository.save(feedback);
     }

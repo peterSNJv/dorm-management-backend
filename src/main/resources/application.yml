@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   application:
@@ -24,6 +24,9 @@ spring:
   h2:
     console:
       enabled: true
+logging:
+  level:
+    org.springframework.security: INFO
 
 # 架构灵活性：通过配置开关与端点集成各系统，避免强耦合
 dorm:

@@ -15,6 +15,10 @@ public class RepairService {
         this.repository = repository;
     }
 
+    public List<RepairRequest> findAll() {
+        return repository.findAll();
+    }
+
     public RepairRequest create(RepairRequest request) {
         return repository.save(request);
     }

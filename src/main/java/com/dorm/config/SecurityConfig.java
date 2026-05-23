@@ -28,9 +28,10 @@ public class SecurityConfig {
             .csrf(c -> c.disable())
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(a -> a
-                .requestMatchers("/api/login", "/api/register", "/api/sso/callback", "/api/health").permitAll()
+                .requestMatchers("/api/login", "/api/register", "/api/admin/login", "/api/sso/callback", "/api/health").permitAll()
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/**").authenticated()
-                .anyRequest().denyAll()
+                .anyRequest().permitAll()
             )
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

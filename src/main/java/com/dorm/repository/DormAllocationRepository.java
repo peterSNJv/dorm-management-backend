@@ -4,10 +4,13 @@ import com.dorm.domain.entity.DormAllocation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface DormAllocationRepository extends JpaRepository<DormAllocation, Long> {
 
     Optional<DormAllocation> findByStudent_Id(Long studentId);
+
+    List<DormAllocation> findByRoom_Id(Long roomId);
 }

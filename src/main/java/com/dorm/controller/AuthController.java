@@ -101,6 +101,17 @@ public class AuthController {
         return ResponseEntity.ok(Map.of("message", "注册成功"));
     }
 
+    @PostMapping("/admin/login")
+    public ResponseEntity<?> adminLogin(@RequestBody Map<String, String> body) {
+        String username = body.get("username");
+        String password = body.get("password");
+        if ("zhouzhike".equals(username) && "zzk248600".equals(password)) {
+            String token = jwtService.createToken("zhouzhike", "ADMIN");
+            return ResponseEntity.ok(Map.of("token", token, "role", "ADMIN", "name", "管理员"));
+        }
+        return ResponseEntity.status(401).body(Map.of("message", "用户名或密码错误"));
+    }
+
     @GetMapping("/health")
     public ResponseEntity<Map<String, String>> health() {
         return ResponseEntity.ok(Map.of("status", "UP"));

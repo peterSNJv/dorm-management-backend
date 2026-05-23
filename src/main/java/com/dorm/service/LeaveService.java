@@ -15,6 +15,10 @@ public class LeaveService {
         this.repository = repository;
     }
 
+    public List<LeaveRequest> findAll() {
+        return repository.findAll();
+    }
+
     public LeaveRequest create(LeaveRequest request) {
         return repository.save(request);
     }
