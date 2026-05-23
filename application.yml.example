@@ -1,0 +1,39 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: dorm-management
+  datasource:
+    url: jdbc:h2:file:./data/dorm;DB_CLOSE_DELAY=-1;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+  h2:
+    console:
+      enabled: true
+logging:
+  level:
+    org.springframework.security: INFO
+
+dorm:
+  jwt:
+    secret: your-256-bit-secret-key-here-change-in-production!!!
+    expiration-ms: 86400000
+  security:
+    encryption-key: 0123456789abcdef0123456789abcdef
+  admin:
+    username: admin
+    password: admin123

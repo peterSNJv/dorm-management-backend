@@ -5,6 +5,7 @@ import com.dorm.repository.StudentRepository;
 import com.dorm.security.AuditService;
 import com.dorm.security.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,12 @@ public class AuthController {
     private final AuditService auditService;
     private final StudentRepository studentRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+
+    @Value("${dorm.admin.username}")
+    private String adminUsername;
+
+    @Value("${dorm.admin.password}")
+    private String adminPassword;
 
     public AuthController(
             JwtService jwtService,
@@ -105,8 +112,8 @@ public class AuthController {
     public ResponseEntity<?> adminLogin(@RequestBody Map<String, String> body) {
         String username = body.get("username");
         String password = body.get("password");
-        if ("zhouzhike".equals(username) && "zzk248600".equals(password)) {
-            String token = jwtService.createToken("zhouzhike", "ADMIN");
+        if (adminUsername.equals(username) && adminPassword.equals(password)) {
+            String token = jwtService.createToken(adminUsername, "ADMIN");
             return ResponseEntity.ok(Map.of("token", token, "role", "ADMIN", "name", "管理员"));
         }
         return ResponseEntity.status(401).body(Map.of("message", "用户名或密码错误"));

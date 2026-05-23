@@ -1,0 +1,23 @@
+# Build output
+target/
+
+# Local config with credentials
+src/main/resources/application.yml
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files
+data/
+*.mv.db
+*.trace.db
+
+# Claude Code
+.claude/
+.cheat-hooks/
+.cheat-state.json
